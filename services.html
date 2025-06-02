@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Portfolio - Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
+    <style>
+        /* Additional styles specific to services page */
+        .services-hero {
+            background-color: var(--light-color);
+            padding: 120px 5% 80px;
+            text-align: center;
+        }
+
+        .services-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .services-grid {
+            padding: 5rem 5%;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -40px auto 1.5rem;
+            position: relative;
+            z-index: 2;
+            border: 5px solid white;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon i {
+            color: white;
+        }
+
+        .service-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .service-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .service-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .process-section {
+            background-color: var(--light-color);
+            padding: 5rem 5%;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '\f054';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 25%;
+            right: -20px;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            transform: translateY(-50%);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: var(--heading-font);
+        }
+
+        .process-step h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .process-step p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .pricing-section {
+            padding: 5rem 5%;
+        }
+
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-plan {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pricing-plan:hover {
+            transform: translateY(-10px);
+        }
+
+        .popular-plan {
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+
+        .plan-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .plan-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .plan-features {
+            padding: 2rem;
+        }
+
+        .plan-features li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .plan-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .plan-cta {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .faq-section {
+            background-color: var(--light-color);
+            padding: 5rem 5%;
+        }
+
+        .accordion {
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .accordion-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .accordion-header {
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        .accordion-header h3 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .accordion-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content p {
+            padding: 1rem 0 1.5rem;
+            color: #666;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 300px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .pricing-plans {
+                gap: 2rem;
+            }
+            
+            .accordion-header h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <span>Team</span>Portfolio
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="services-hero">
+            <h1>Our Services</h1>
+            <p class="subtitle">Comprehensive digital solutions to help your business thrive</p>
+        </section>
+
+        <section class="services-grid">
+            <h2 class="section-title">What We Offer</h2>
+            <p class="section-subtitle">Tailored solutions designed to meet your specific needs and objectives</p>
+            
+            <div class="services-container">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Web Development</h3>
+                        <p>Custom websites and web applications built with modern technologies and best practices.</p>
+                        <ul class="service-features">
+                            <li>Responsive design for all devices</li>
+                            <li>Performance optimization</li>
+                            <li>SEO-friendly structure</li>
+                            <li>Content management systems</li>
+                            <li>E-commerce functionality</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Mobile App Development</h3>
+                        <p>Native and cross-platform mobile applications for iOS and Android devices.</p>
+                        <ul class="service-features">
+                            <li>User-friendly interfaces</li>
+                            <li>Performance optimization</li>
+                            <li>Offline functionality</li>
+                            <li>API integration</li>
+                            <li>App store submission</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>UI/UX Design</h3>
+                        <p>User-centered design services focused on creating intuitive and engaging experiences.</p>
+                        <ul class="service-features">
+                            <li>User research and testing</li>
+                            <li>Wireframing and prototyping</li>
+                            <li>Visual design and branding</li>
+                            <li>Interaction design</li>
+                            <li>Usability optimization</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Backend Development</h3>
+                        <p>Robust server-side solutions that power your applications with reliability and security.</p>
+                        <ul class="service-features">
+                            <li>API development</li>
+                            <li>Database design</li>
+                            <li>Authentication systems</li>
+                            <li>Cloud infrastructure</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Digital Marketing</h3>
+                        <p>Strategic digital marketing services to increase your online visibility and drive growth.</p>
+                        <ul class="service-features">
+                            <li>Search engine optimization (SEO)</li>
+                            <li>Content marketing</li>
+                            <li>Social media management</li>
+                            <li>Pay-per-click advertising</li>
+                            <li>Analytics and reporting</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Maintenance & Support</h3>
+                        <p>Ongoing technical support and maintenance to ensure your digital assets remain secure and up-to-date.</p>
+                        <ul class="service-features">
+                            <li>Regular updates and security patches</li>
+                            <li>Performance monitoring</li>
+                            <li>Technical support</li>
+                            <li>Content updates</li>
+                            <li>Feature enhancements</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-section">
+            <h2 class="section-title">Our Process</h2>
+            <p class="section-subtitle">How we work with you to bring your vision to life</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>We begin by understanding your business, goals, and requirements through in-depth consultations and research.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Planning</h3>
+                    <p>We create a detailed roadmap with clear milestones, timelines, and deliverables for your project.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Design</h3>
+                    <p>Our designers create mockups and prototypes to visualize the solution before development begins.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Development</h3>
+                    <p>Our development team brings the designs to life with clean, efficient, and maintainable code.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>Testing</h3>
+                    <p>Rigorous quality assurance ensures your solution works flawlessly across all platforms and devices.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h3>Launch</h3>
+                    <p>We handle the deployment process and ensure a smooth transition to your new digital solution.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">7</div>
+                    <h3>Support</h3>
+                    <p>Our relationship continues with ongoing maintenance, updates, and support for your project.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing-section">
+            <h2 class="section-title">Our Pricing Plans</h2>
+            <p class="section-subtitle">Transparent and flexible pricing options to suit businesses of all sizes</p>
+            
+            <div class="pricing-plans">
+                <!-- Basic Plan -->
+                <div class="pricing-plan">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Basic</h3>
+                        <div class="plan-price">$999<span>/project</span></div>
+                        <p class="plan-description">Perfect for small businesses just getting started</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Up to 5 pages</li>
+                        <li>Responsive design</li>
+                        <li>Basic SEO setup</li>
+                        <li>Contact form</li>
+                        <li>Social media integration</li>
+                        <li>1 month of support</li>
+                    </ul>
+                    <div class="plan-cta">
+                        <a href="#" class="btn btn-secondary">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Professional Plan -->
+                <div class="pricing-plan popular-plan">
+                    <div class="popular-badge">Popular</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Professional</h3>
+                        <div class="plan-price">$2,499<span>/project</span></div>
+                        <p class="plan-description">Ideal for growing businesses with specific needs</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Up to 10 pages</li>
+                        <li>Advanced responsive design</li>
+                        <li>Comprehensive SEO setup</li>
+                        <li>Custom contact forms</li>
+                        <li>Content management system</li>
+                        <li>E-commerce functionality (up to 50 products)</li>
+                        <li>3 months of support</li>
+                        <li>Performance optimization</li>
+                    </ul>
+                    <div class="plan-cta">
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Enterprise Plan -->
+                <div class="pricing-plan">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price">Custom<span>/project</span></div>
+                        <p class="plan-description">Tailored solutions for large businesses with complex requirements</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Unlimited pages</li>
+                        <li>Custom design and development</li>
+                        <li>Advanced e-commerce solutions</li>
+                        <li>Custom integrations</li>
+                        <li>Database development</li>
+                        <li>Advanced security features</li>
+                        <li>Priority support</li>
+                        <li>Dedicated account manager</li>
+                        <li>6 months of support</li>
+                    </ul>
+                    <div class="plan-cta">
+                        <a href="#" class="btn btn-secondary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Answers to common questions about our services</p>
+            
+            <div class="accordion">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How long does it take to complete a project?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Project timelines vary depending on complexity and scope. A simple website might take 2-4 weeks, while a complex web application could take 3-6 months. During our initial consultation, we'll provide a detailed timeline based on your specific requirements.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Do you provide ongoing maintenance?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, we offer various maintenance packages to keep your website or application secure, up-to-date, and performing optimally. Our maintenance services include regular updates, security patches, performance monitoring, and content updates. We can customize a maintenance plan to suit your specific needs.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>What is your payment process?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We typically work with a 50% upfront deposit to begin the project, with the remaining balance due upon completion. For larger projects, we may structure payments into milestones. We accept payments via bank transfer, credit card, or PayPal. All payment terms are clearly outlined in our contract before work begins.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Do you work with clients internationally?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Absolutely! We work with clients from around the world. Our team is experienced in managing remote projects effectively through clear communication, regular updates, and collaborative tools. We adjust our working hours when needed to accommodate different time zones for meetings and discussions.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>What technologies do you work with?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We work with a wide range of technologies, including HTML, CSS, JavaScript, React, Vue.js, Angular, Node.js, PHP, Python, WordPress, Shopify, and many others. We choose the most appropriate technology stack for each project based on requirements, scalability needs, and long-term maintenance considerations.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 6 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How do you handle project changes?</h3>
+                        <div class="accordion-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We understand that project requirements can evolve during development. Minor changes are typically accommodated within the project scope. For more significant changes, we'll discuss the impact on timeline and budget before proceeding. We document all change requests and ensure clear communication throughout the process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>We are a team of passionate developers creating digital solutions that help businesses grow and succeed in the digital world.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Innovation Street, Tech City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@teamportfolio.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Team Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                
+                header.addEventListener('click', () => {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other accordion items
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
