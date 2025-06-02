@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Portfolio - Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
+    <style>
+        /* Additional styles specific to projects page */
+        .projects-hero {
+            background-color: var(--light-color);
+            padding: 120px 5% 80px;
+            text-align: center;
+        }
+
+        .projects-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-section {
+            padding: 5rem 5%;
+        }
+
+        .portfolio-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            transition: var(--transition);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-img {
+            height: 250px;
+            background-color: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(52, 152, 219, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+OBOBOB
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+OBOBOB        }
+OBOBOB
+        .portfolio-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .portfolio-links a {
+            width: 45px;
+            height: 45px;
+            background-color: white;
+OBOBOB            border-radius: 50%;
+OBOBOB            display: flex;
+OBOBOB            align-items: center;
+OBOBOB            justify-content: center;
+            color: var(--primary-color);
+OBOBOB            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-links a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-item:hover .portfolio-links a:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .portfolio-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+            background-color: white;
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .portfolio-info p {
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .portfolio-cat {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-study-section {
+            padding: 5rem 5%;
+            background-color: var(--light-color);
+        }
+
+        .case-study {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            margin-top: 3rem;
+        }
+
+        .case-study-content {
+            padding: 3rem;
+        }
+
+        .case-study-img {
+            height: 400px;
+            background-color: #ddd;
+        }
+
+        .case-study-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .case-study h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .case-study-meta div {
+            display: flex;
+            align-items: center;
+        }
+
+        .case-study-meta i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .case-study-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        @media screen and (max-width: 768px) {
+            .projects-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .case-study-content {
+                padding: 2rem;
+            }
+            
+            .case-study-img {
+                height: 300px;
+            }
+            
+            .case-study h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <span>Team</span>Portfolio
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="projects-hero">
+            <h1>Our Projects</h1>
+            <p class="subtitle">Showcasing our best work and successful client collaborations</p>
+        </section>
+
+        <section class="portfolio-section">
+            <h2 class="section-title">Project Portfolio</h2>
+            <p class="section-subtitle">Browse through our latest work across different categories</p>
+            
+            <div class="portfolio-filter">
+                <button class="filter-btn active" onclick="filterPortfolio('all')" data-filter="all">All</button>
+                <button class="filter-btn" onclick="filterPortfolio('web')" data-filter="web">Web Development</button>
+                <button class="filter-btn" onclick="filterPortfolio('mobile')" data-filter="mobile">Mobile Apps</button>
+                <button class="filter-btn" onclick="filterPortfolio('design')" data-filter="design">UI/UX Design</button>
+                <button class="filter-btn" onclick="filterPortfolio('branding')" data-filter="branding">Branding</button>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item web">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 1">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Web Development</span>
+                        <h3>E-commerce Platform</h3>
+                        <p>A comprehensive online shopping solution</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item mobile">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 2">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Mobile App</span>
+                        <h3>Fitness Tracker</h3>
+                        <p>Track workouts and monitor progress</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item design">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 3">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">UI/UX Design</span>
+                        <h3>Banking Dashboard</h3>
+                        <p>Modern interface for financial management</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item branding">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 4">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Branding</span>
+                        <h3>Organic Food Brand</h3>
+                        <p>Complete brand identity for food company</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item web">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 5">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Web Development</span>
+                        <h3>Real Estate Platform</h3>
+                        <p>Property listings and management system</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item mobile">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 6">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Mobile App</span>
+                        <h3>Food Delivery</h3>
+                        <p>On-demand food ordering solution</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 7 -->
+                <div class="portfolio-item design">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 7">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">UI/UX Design</span>
+                        <h3>Educational Platform</h3>
+                        <p>Interface design for online learning</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 8 -->
+                <div class="portfolio-item branding">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 8">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Branding</span>
+                        <h3>Tech Startup Identity</h3>
+                        <p>Visual identity for emerging tech company</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 9 -->
+                <div class="portfolio-item web">
+                    <div class="portfolio-img">
+                        <img src="https://placehold.co/600x400" alt="Project 9">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-links">
+                                <a href="#"><i class="fas fa-link"></i></a>
+                                <a href="#"><i class="fas fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-cat">Web Development</span>
+                        <h3>HR Management System</h3>
+                        <p>Employee management portal for businesses</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="case-study-section">
+            <h2 class="section-title">Featured Case Study</h2>
+            <p class="section-subtitle">A deeper look into one of our successful projects</p>
+            
+            <div class="case-study">
+                <div class="case-study-img">
+                    <img src="https://placehold.co/1200x600" alt="Case Study">
+                </div>
+                <div class="case-study-content">
+                    <h3>E-commerce Platform Redesign</h3>
+                    <div class="case-study-meta">
+                        <div><i class="far fa-calendar-alt"></i> Duration: 3 months</div>
+                        <div><i class="far fa-building"></i> Client: Fashion Retailer</div>
+                        <div><i class="fas fa-tag"></i> Category: Web Development</div>
+                    </div>
+                    
+                    <h4>The Challenge</h4>
+                    <p>Our client, a growing fashion retailer, was experiencing high bounce rates and low conversion on their existing e-commerce platform. They needed a complete redesign that would improve user experience, optimize the checkout process, and increase mobile sales.</p>
+                    
+                    <h4>Our Approach</h4>
+                    <p>We began with comprehensive user research to understand customer pain points and shopping behaviors. Our team then created a new information architecture and user flow, focusing on simplifying navigation and reducing friction in the checkout process. We implemented a responsive design that prioritized mobile users while maintaining a consistent brand experience across all devices.</p>
+                    
+                    <div class="case-study-stats">
+                        <div class="stat-box">
+                            <div class="stat-number">67%</div>
+                            <div class="stat-label">Increase in Conversion Rate</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">45%</div>
+                            <div class="stat-label">Decrease in Cart Abandonment</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">89%</div>
+                            <div class="stat-label">Mobile Users Satisfaction</div>
+                        </div>
+                    </div>
+                    
+                    <h4>The Solution</h4>
+                    <p>The final platform featured a clean, modern design with intuitive navigation, advanced search functionality, and personalized product recommendations. We implemented a streamlined checkout process that reduced steps and offered multiple payment options. The mobile experience was optimized for speed and ease of use, with touch-friendly elements and simplified forms.</p>
+                    
+                    <h4>The Results</h4>
+                    <p>Within three months of launch, the client saw a significant increase in conversions, reduction in cart abandonment, and improvement in customer satisfaction scores. Mobile sales grew by 72%, becoming the primary revenue channel for the business.</p>
+                    
+                    <div class="cta-centered">
+                        <a href="#" class="btn btn-primary">View Full Case Study</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>We are a team of passionate developers creating digital solutions that help businesses grow and succeed in the digital world.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Innovation Street, Tech City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@teamportfolio.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Team Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
