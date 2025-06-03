@@ -460,22 +460,27 @@ header.scrolled {
 
 #team-lead {
     background-color: #3498DB;
+    background-image: url('../images/team-lead.jpg');
 }
 
 #member-1 {
     background-color: #E74C3C;
+    background-image: url('../images/member-1.jpg');
 }
 
 #member-2 {
     background-color: #2ECC71;
+    background-image: url('../images/member-2.jpg');
 }
 
 #member-3 {
     background-color: #F39C12;
+    background-image: url('../images/member-3.jpg');
 }
 
 #member-4 {
     background-color: #9B59B6;
+    background-image: url('../images/member-4.jpg');
 }
 
 .team-member-circle h3 {
@@ -858,9 +863,40 @@ footer {
     .team-circles {
         gap: 1.5rem;
     }
-    
-    .member-image {
+      .member-image {
         width: 120px;
         height: 120px;
     }
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-5px);
 }

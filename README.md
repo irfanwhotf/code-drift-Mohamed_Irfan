@@ -1,4 +1,23 @@
-# Team Portfolio Website
+# Team Portfolio Website - Fixed Issues
+
+The following issues have been fixed in this website:
+
+1. Added background images for team member profiles
+2. Fixed email validation regex in the contact form
+3. Fixed mobile menu navigation
+4. Added back-to-top button to all pages
+5. Fixed form validation for the contact form
+6. Added placeholder images for team members
+7. Added missing animation in testimonial slider
+
+All pages now have a consistent back-to-top button that appears when scrolling down, making navigation easier on longer pages.
+
+To add real team member images, replace the placeholder files in the `/images` directory:
+- team-lead.jpg
+- member-1.jpg
+- member-2.jpg
+- member-3.jpg
+- member-4.jpg Website
 
 ## Overview
 This is a collaborative team portfolio website showcasing our team members, skills, and projects. The website features a responsive design with modern UI elements and interactive components.
