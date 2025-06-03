@@ -192,9 +192,7 @@ function initializeScrollEffects() {
 function animateOnScroll() {
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     
-    if (!animatedElements.length) return;
-
-    const elementInView = (el, percentageScroll = 100) => {
+    if (!animatedElements.length) return;    const elementInView = (el, percentageScroll = 100) => {
         const elementTop = el.getBoundingClientRect().top;
         return (
             elementTop <= 
@@ -257,7 +255,7 @@ function validateForm(form) {
  * @returns {boolean} - Whether the email is valid
  */
 function isValidEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
 

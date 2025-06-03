@@ -495,61 +495,25 @@
                     }
                 });
             });
+        });        // Email validation uses the function from main.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            
+            // Reset validation on input
+            if (form) {
+                const inputs = form.querySelectorAll('input, textarea, select');
+                inputs.forEach(input => {
+                    input.addEventListener('input', function() {
+                        this.classList.remove('invalid', 'valid');
+                        const errorElement = this.parentNode.querySelector('.error-message');
+                        if (errorElement) {
+                            errorElement.remove();
+                        }
+                    });
+                });
+            }
         });
-
-        // Form validation function
-        function validateForm(form) {
-            const inputs = form.querySelectorAll('input, textarea, select');
-            let isValid = true;
-
-            inputs.forEach(input => {
-                if (input.hasAttribute('required') && !input.value.trim()) {
-                    markInvalid(input, 'This field is required');
-                    isValid = false;
-                } else if (input.type === 'email' && input.value && !isValidEmail(input.value)) {
-                    markInvalid(input, 'Please enter a valid email address');
-                    isValid = false;
-                } else {
-                    markValid(input);
-                }
-            });
-
-            return isValid;
-        }
-
-        // Email validation function
-        function isValidEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-
-        // Mark form field as invalid
-        function markInvalid(element, message) {
-            element.classList.add('invalid');
-            element.classList.remove('valid');
-            
-            // Find or create error message element
-            let errorElement = element.parentNode.querySelector('.error-message');
-            if (!errorElement) {
-                errorElement = document.createElement('div');
-                errorElement.className = 'error-message';
-                element.parentNode.appendChild(errorElement);
-            }
-            
-            errorElement.textContent = message;
-        }
-
-        // Mark form field as valid
-        function markValid(element) {
-            element.classList.remove('invalid');
-            element.classList.add('valid');
-            
-            // Remove error message if it exists
-            const errorElement = element.parentNode.querySelector('.error-message');
-            if (errorElement) {
-                errorElement.remove();
-            }
-        }
+        
     </script>
 </body>
 </html>
